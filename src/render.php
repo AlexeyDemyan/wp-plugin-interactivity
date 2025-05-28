@@ -18,17 +18,38 @@
 <!-- Below is example of creating a value in context and pulling it into the text of the Span -->
 <!-- Echoing wp_interactivity_data_wp_context populates data-wp-context with whatever we're passing as parameter-->
 <!-- It also conveniently transpiles PHP array into a JS array -->
+
+<?php
+$answers = array();
+for ($i = 0; $i < count($attributes['answers']); $i++) {
+	$answers[$i]['index'] = $i;
+	$answers[$i]['text'] = $attributes['answers'][$i];
+	$answers[$i]['correct'] = $attributes['correctAnswer'] == $i;
+}
+$customContext = array(
+	'answers' => $answers,
+	'solved' => false,
+	'showCongrats' => false,
+	'showSorry' => false,
+	'correctAnswer' => $attributes['correctAnswer']
+);
+?>
+
 <div
 	class="paying-attention-frontend"
-	style="background-color: <?php echo $attributes['bgColor'] ?>;" 
+	style="background-color: <?php echo $attributes['bgColor'] ?>;"
 	data-wp-interactive="create-block"
-	<?php echo wp_interactivity_data_wp_context($attributes) ?>
-	>
+	<?php echo wp_interactivity_data_wp_context($customContext) ?>>
 	<p><?php echo $attributes['question'] ?></p>
 	<ul>
-		<!-- data-wp-each sort of starts the loop, and context.item is the reserved way to access one item -->
-		<template data-wp-each="context.answers">
-			<li data-wp-on--click="actions.guessAttempt" data-wp-text="context.item"></li>
-		</template>
+		<?php
+		foreach ($attributes['answers'] as $answer) {
+		?>
+			<!-- Child items get access to their context, but also to that of their parents -->
+			<!-- And below we are merging the 2 contexts -->
+			<li data-wp-context='{"skyColor":"blue-ish"}' data-wp-on--click="actions.guessAttempt"><?php echo $answer ?></li>
+		<?php
+		}
+		?>
 	</ul>
 </div>
