@@ -17,6 +17,10 @@ const { state } = store( 'create-block', {
 		toggleTheme() {
 			state.isDark = ! state.isDark;
 		},
+		buttonHandler() {
+			const context = getContext();
+			context.clickCount++;
+		}
 	},
 	callbacks: {
 		logIsOpen: () => {
