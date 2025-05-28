@@ -3,30 +3,30 @@
  */
 import { store, getContext } from '@wordpress/interactivity';
 
-const { state } = store( 'create-block', {
-	state: {
-		get themeText() {
-			return state.isDark ? state.darkText : state.lightText;
-		},
-	},
-	actions: {
-		toggleOpen() {
-			const context = getContext();
-			context.isOpen = ! context.isOpen;
-		},
-		toggleTheme() {
-			state.isDark = ! state.isDark;
-		},
-		buttonHandler() {
-			const context = getContext();
-			context.clickCount++;
-		}
-	},
-	callbacks: {
-		logIsOpen: () => {
-			const { isOpen } = getContext();
-			// Log the value of `isOpen` each time it changes.
-			console.log( `Is open: ${ isOpen }` );
-		},
-	},
-} );
+const { state } = store('create-block', {
+  state: {
+    get themeText() {
+      return state.isDark ? state.darkText : state.lightText;
+    },
+  },
+  actions: {
+    toggleOpen() {
+      const context = getContext();
+      context.isOpen = !context.isOpen;
+    },
+    toggleTheme() {
+      state.isDark = !state.isDark;
+    },
+    guessAttempt() {
+      const context = getContext();
+      console.log(context);
+    },
+  },
+  callbacks: {
+    logIsOpen: () => {
+      const { isOpen } = getContext();
+      // Log the value of `isOpen` each time it changes.
+      console.log(`Is open: ${isOpen}`);
+    },
+  },
+});
