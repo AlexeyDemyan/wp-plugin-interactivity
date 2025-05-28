@@ -43,11 +43,11 @@ $customContext = array(
 	<p><?php echo $attributes['question'] ?></p>
 	<ul>
 		<?php
-		foreach ($attributes['answers'] as $answer) {
+		foreach ($customContext['answers'] as $answer) {
 		?>
 			<!-- Child items get access to their context, but also to that of their parents -->
 			<!-- And below we are merging the 2 contexts -->
-			<li data-wp-context='{"skyColor":"blue-ish"}' data-wp-on--click="actions.guessAttempt"><?php echo $answer ?></li>
+			<li <?php echo wp_interactivity_data_wp_context($answer) ?> data-wp-on--click="actions.guessAttempt"><?php echo $answer['text'] ?></li>
 		<?php
 		}
 		?>

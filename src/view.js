@@ -19,7 +19,7 @@ const { state } = store('create-block', {
     },
     guessAttempt() {
       const context = getContext();
-      console.log(context);
+      console.log(context.index === context.correctAnswer);
     },
   },
   callbacks: {
