@@ -20,6 +20,8 @@
 <!-- It also conveniently transpiles PHP array into a JS array -->
 
 <?php
+wp_interactivity_state('create-block', array('solvedCounter' => 0));
+
 $answers = array();
 for ($i = 0; $i < count($attributes['answers']); $i++) {
 	$answers[$i]['index'] = $i;
@@ -70,3 +72,9 @@ $customContext = array(
 	</div>
 </div>
 </div>
+
+<!-- 
+This is what we wrote in another place to gain access to the State:
+<div data-wp-interactive="create-block">
+	<p>Questions solved: <strong><span data-wp-text="state.solvedCounter"></span></strong></p>
+</div> -->

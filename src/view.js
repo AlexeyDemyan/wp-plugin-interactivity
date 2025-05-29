@@ -21,6 +21,7 @@ const { state } = store('create-block', {
       const context = getContext();
       if (!context.solved) {
         if (context.index === context.correctAnswer) {
+          state.solvedCounter++;
           context.showCongrats = true;
           setTimeout(() => {
             context.solved = true;
